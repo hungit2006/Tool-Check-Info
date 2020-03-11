@@ -21,10 +21,23 @@ swaks --to user@example.com --server smtp.example.com
 swaks -t user@example.com -s smtp.gmail.com:587 -tls -a LOGIN
 ----------------------------------------------------------------------------------
 #Send EICAR Virus Test Email
-
 #Test a virus scanner using EICAR in an attachment.  Don’t show the message DATA part.
 
 swaks -t user@example.com --attach --suppress-data < /path/to/eicar.txt
 
 #--attach switch can be used to specify attachment.
 ----------------------------------------------------------------------------------
+#Send GTUBE Spam Test Email
+#Test a spam scanner using GTUBE in the body of an email.
+
+swaks --to user@example.com --body /path/to/gtube/file
+
+----------------------------------------------------------------------------------
+#Test List of Fake Email Addressees
+#Report all the recipients in a text file that are non-verifiable:
+
+for E in `cat /path/to/email/file`
+do
+     swaks --to $E --server test-server.example.com --quit-after RCPT --hide-all
+     [ $? -ne 0 ] && echo $E
+done
