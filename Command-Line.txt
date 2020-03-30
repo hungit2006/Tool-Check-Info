@@ -110,3 +110,23 @@ Issuing a mount command will now show the share mounted, just as if it were an N
 none on /proc type proc (rw)
 none on /dev/pts type devpts (rw,mode=622)
 //SAMBA1/CUSTOMERS on /customers type smbfs (0)
+------------------------------------------------------------------------------------
+How to Show Asterisks While Typing Sudo Password in Linux
+You can enable the password feedback feature in /etc/sudoers file, but first create a backup of the file, then open it for editing using the visudo command.
+
+     $ sudo cp /etc/sudoers /etc/sudoers.bak
+     $ sudo visudo 
+
+Search for the following line.
+
+     Defaults env_reset
+
+And append pwfeedback to it, so that it looks like this.
+
+     Defaults env_reset,pwfeedback
+     
+Now press Esc key and type :wq to save and close the file. But if you are using nano editor, save the file by hitting “Ctrl+x” and then “y” followed by “ENTER” to close it.
+
+Then run the command below to reset your terminal for the above changes to start working.
+
+     $ reset
